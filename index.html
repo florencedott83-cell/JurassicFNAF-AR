@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurassic FNAF AR - Dinosaur Survival Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- AR Camera/Game View -->
+        <div id="ar-view">
+            <video id="camera-feed" autoplay playsinline></video>
+            <canvas id="game-canvas"></canvas>
+            
+            <!-- HUD Elements -->
+            <div id="hud">
+                <div class="hud-panel top-left">
+                    <div id="health-display">
+                        <span>Health:</span>
+                        <div id="health-bar" class="health-bar">
+                            <div id="health-fill" class="health-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hud-panel top-right">
+                    <div id="threat-level">
+                        <span>Threat Level:</span>
+                        <div id="threat-meter"></div>
+                    </div>
+                </div>
+                
+                <div class="hud-panel bottom-left">
+                    <div id="ammo-display">
+                        <span>Ammo:</span>
+                        <span id="ammo-count">30/120</span>
+                    </div>
+                </div>
+                
+                <div class="hud-panel bottom-right">
+                    <div id="wave-display">
+                        <span>Wave:</span>
+                        <span id="wave-number">1</span>
+                    </div>
+                    <div id="score-display">
+                        <span>Score:</span>
+                        <span id="score">0</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Crosshair -->
+            <div id="crosshair"></div>
+            
+            <!-- Dinosaur Detection Alert -->
+            <div id="detection-alert" class="hidden">
+                <div class="alert-box">
+                    <span id="alert-text">DINOSAUR DETECTED!</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Game Menu -->
+        <div id="game-menu" class="menu-screen">
+            <div class="menu-content">
+                <h1>JURASSIC FNAF AR</h1>
+                <p>Survive the dinosaur encounters</p>
+                <button id="start-btn" class="menu-btn">START GAME</button>
+                <button id="settings-btn" class="menu-btn">SETTINGS</button>
+                <button id="bestiary-btn" class="menu-btn">BESTIARY</button>
+            </div>
+        </div>
+        
+        <!-- Bestiary Screen -->
+        <div id="bestiary-screen" class="menu-screen hidden">
+            <div class="menu-content">
+                <h2>DINOSAUR BESTIARY</h2>
+                <div id="bestiary-list"></div>
+                <button id="back-btn" class="menu-btn">BACK</button>
+            </div>
+        </div>
+        
+        <!-- Game Over Screen -->
+        <div id="gameover-screen" class="menu-screen hidden">
+            <div class="menu-content">
+                <h1>GAME OVER</h1>
+                <div id="gameover-stats">
+                    <p>Final Score: <span id="final-score">0</span></p>
+                    <p>Waves Survived: <span id="waves-survived">0</span></p>
+                    <p>Dinosaurs Defeated: <span id="dinos-defeated">0</span></p>
+                </div>
+                <button id="restart-btn" class="menu-btn">RESTART</button>
+                <button id="menu-btn" class="menu-btn">MAIN MENU</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="dinosaurs.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
