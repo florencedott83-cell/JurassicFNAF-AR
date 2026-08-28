@@ -1,0 +1,385 @@
+/* Jurassic FNAF AR - Stylesheet */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #000;
+    overflow: hidden;
+    color: #fff;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: #000;
+}
+
+/* AR View */
+#ar-view {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: none;
+}
+
+#camera-feed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#game-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+}
+
+/* HUD */
+#hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.hud-panel {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #00ff00;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    min-width: 200px;
+}
+
+.hud-panel.top-left {
+    top: 20px;
+    left: 20px;
+}
+
+.hud-panel.top-right {
+    top: 20px;
+    right: 20px;
+}
+
+.hud-panel.bottom-left {
+    bottom: 20px;
+    left: 20px;
+}
+
+.hud-panel.bottom-right {
+    bottom: 20px;
+    right: 20px;
+    text-align: right;
+}
+
+#health-display,
+#threat-level,
+#ammo-display,
+#wave-display,
+#score-display {
+    margin: 10px 0;
+}
+
+.health-bar,
+#threat-meter {
+    width: 100%;
+    height: 20px;
+    background: rgba(255, 0, 0, 0.5);
+    border: 1px solid #00ff00;
+    margin-top: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+#health-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00ff00, #ffff00);
+    width: 100%;
+    transition: width 0.2s;
+}
+
+#threat-meter {
+    background: rgba(255, 100, 0, 0.5);
+    width: 100%;
+}
+
+/* Crosshair */
+#crosshair {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 15;
+}
+
+#crosshair::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 15px;
+    background: #00ff00;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#crosshair::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 2px;
+    background: #00ff00;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Detection Alert */
+#detection-alert {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    animation: pulse 0.5s ease-out;
+}
+
+#detection-alert.hidden {
+    display: none;
+}
+
+.alert-box {
+    background: rgba(255, 0, 0, 0.9);
+    border: 3px solid #ff0000;
+    padding: 30px 50px;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 0 20px #ff0000;
+    border-radius: 10px;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Menu Screens */
+.menu-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+
+.menu-screen.hidden {
+    display: none;
+}
+
+.menu-content {
+    text-align: center;
+    max-width: 600px;
+    padding: 40px;
+}
+
+#game-menu h1 {
+    font-size: 64px;
+    color: #00ff00;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+#game-menu p {
+    font-size: 24px;
+    color: #ffff00;
+    margin-bottom: 40px;
+}
+
+.menu-btn {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    padding: 15px 30px;
+    margin: 15px auto;
+    background: #00ff00;
+    color: #000;
+    border: 2px solid #00ff00;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.menu-btn:hover {
+    background: #ffff00;
+    border-color: #ffff00;
+    box-shadow: 0 0 10px #ffff00;
+    transform: scale(1.05);
+}
+
+.menu-btn:active {
+    transform: scale(0.95);
+}
+
+/* Bestiary */
+#bestiary-screen h2 {
+    font-size: 48px;
+    color: #00ff00;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+#bestiary-list {
+    max-height: 60vh;
+    overflow-y: auto;
+    margin-bottom: 30px;
+}
+
+.bestiary-entry {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(0, 255, 0, 0.1);
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.dino-entry {
+    display: flex;
+    gap: 20px;
+}
+
+.dino-emoji {
+    font-size: 48px;
+    min-width: 60px;
+    text-align: center;
+    line-height: 60px;
+}
+
+.dino-info h3 {
+    color: #ffff00;
+    margin-bottom: 5px;
+}
+
+.dino-info p {
+    color: #00ff00;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.dino-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 12px;
+    color: #aaa;
+}
+
+.dino-stats span {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+/* Game Over Screen */
+#gameover-screen h1 {
+    font-size: 56px;
+    color: #ff0000;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px #ff0000;
+}
+
+#gameover-stats {
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #ff0000;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+}
+
+#gameover-stats p {
+    font-size: 20px;
+    margin: 10px 0;
+    color: #ffff00;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .hud-panel {
+        font-size: 14px;
+        padding: 10px;
+        min-width: auto;
+    }
+
+    .menu-btn {
+        font-size: 16px;
+        padding: 12px 25px;
+    }
+
+    #game-menu h1 {
+        font-size: 48px;
+    }
+
+    #game-menu p {
+        font-size: 18px;
+    }
+
+    .alert-box {
+        font-size: 24px;
+        padding: 20px 30px;
+    }
+}
+
+/* Scrollbar Styling */
+#bestiary-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+#bestiary-list::-webkit-scrollbar-track {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+#bestiary-list::-webkit-scrollbar-thumb {
+    background: #00ff00;
+    border-radius: 4px;
+}
+
+#bestiary-list::-webkit-scrollbar-thumb:hover {
+    background: #ffff00;
+}
